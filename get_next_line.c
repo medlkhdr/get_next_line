@@ -1,9 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#define BUFFERSIZE 10
-
+#include "get_next_line.h"
 char *get_next_line(int fd)
 {
     static char *stock = NULL;
@@ -24,10 +19,10 @@ char *get_next_line(int fd)
             break;
 
         buffer[bytes_read] = '\0';
-        stock = realloc(stock, strlen(stock) + bytes_read + 1);
-        strcat(stock, buffer);
+        stock = ft_realloc(stock, ft_strlen(stock),ft_strlen(stock) + bytes_read + 1);
+        ft_strcat(stock, buffer);
 
-        if (strchr(stock, '\n'))
+        if (ft_strchr(stock, '\n'))
             break;
     }
 
@@ -37,13 +32,13 @@ char *get_next_line(int fd)
       while(stock[i] != '\n' && stock[i] != '\0')
         i++;
     line = malloc(i + 1);
-    strncpy(line, stock, i);
+    line = ft_strncpy(line, stock, i);
     line[i] = '\0';
 
     if (stock[i] == '\n')
         i++;
 
-    line_length = strlen(stock) - i;
+    line_length = ft_strlen(stock) - i;
     char *new_stock = malloc(line_length + 1);
     for (j = 0; j < line_length; j++)
         new_stock[j] = stock[i + j];
@@ -53,13 +48,4 @@ char *get_next_line(int fd)
     stock = new_stock;
 
     return line;
-}
-int main(void)
-{
-   int fd = open("c.txt" , O_CREAT | O_APPEND);
-   char *s  = get_next_line(fd);
-   printf("%s " , s);
-   s = get_next_line(fd);
-   printf("\n%s" ,s);
-   
 }
