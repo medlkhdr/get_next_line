@@ -1,4 +1,5 @@
 #include "get_next_line.h"
+
 void	*ft_calloc(size_t count, size_t size)
 {
 	void	*ptr;
@@ -65,7 +66,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	}
 	return (dest);
 }
-char	*ft_strncpy(char *dest, char *src, unsigned int n )
+char	*ft_strncpy(char *dest, char *src, unsigned int n)
 {
 	unsigned int	i;
 
@@ -109,22 +110,28 @@ size_t	ft_strlen(const char *s)
 	}
 	return ((size_t)(ptr - s));
 }
-void *ft_realloc(void *ptr, size_t old_size, size_t new_size) {
-    if (new_size == old_size) {
-        free(ptr);
-        return NULL;
-    }
-    void *new_ptr = malloc(new_size);
-    if (!new_ptr)
-        return NULL;
-    if (ptr) {
-        size_t copy_size = old_size < new_size ? old_size : new_size;
-        if(old_size < new_size)
-          copy_size = old_size ;
-        else
-          copy_size = new_size;
-        ft_memcpy(new_ptr, ptr, copy_size);
-        free(ptr);
-    }
-    return new_ptr;
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size)
+{
+	void	*new_ptr;
+	size_t	copy_size;
+
+	if (new_size == old_size)
+	{
+		free(ptr);
+		return (NULL);
+	}
+	new_ptr = malloc(new_size);
+	if (!new_ptr)
+		return (NULL);
+	if (ptr)
+	{
+		copy_size = old_size < new_size ? old_size : new_size;
+		if (old_size < new_size)
+			copy_size = old_size;
+		else
+			copy_size = new_size;
+		ft_memcpy(new_ptr, ptr, copy_size);
+		free(ptr);
+	}
+	return (new_ptr);
 }
