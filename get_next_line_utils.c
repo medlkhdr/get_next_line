@@ -1,12 +1,5 @@
 #include "get_next_line.h"
-void	ft_bzero(void *s, size_t n)
-{
-	if (n == 0)
-	{
-		return ;
-	}
-	ft_memset(s, 0, n);
-}
+#include<fcntl.h>
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	size_t	len_s1;
@@ -105,6 +98,6 @@ void	*ft_calloc(size_t count, size_t size)
 	{
 		return (NULL);
 	}
-	ft_bzero(ptr, size * count);
+	ft_memset(ptr, 0, count * size);
 	return (ptr);
 }

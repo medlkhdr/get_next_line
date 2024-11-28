@@ -6,7 +6,8 @@ size_t readwholefile(int fd, char **f) {
     char *temp;
 
     *f = ft_calloc(1, sizeof(char));
-    if (!*f) return -1;
+    if (!*f)
+        return -1;
 
     while (1) {
         buf = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
@@ -30,7 +31,8 @@ size_t readwholefile(int fd, char **f) {
     return check_endofile;
 }
 
-char *get_line(s_buffer *d) {
+char *get_line(s_buffer *d)
+{
     int i = 0;
     char *s;
     char *buffer = d->buffer + d->offset;
@@ -72,22 +74,4 @@ char *get_next_line(int fd) {
     }
 
     return line;
-}
-
-int main(void) {
-    int fd = open("t.txt", O_RDONLY);
-    if (fd < 0) {
-        perror("Error opening file");
-        return 1;
-    }
-
-    char *line;
-    for(int i = 0 ; i < 33 ; i++)
-    {
-        line = get_next_line(fd);
-        printf("%s" , line);
-        free(line);
-    }
-    close(fd);
-    return 0;
 }
