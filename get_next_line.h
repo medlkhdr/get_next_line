@@ -9,12 +9,11 @@
 #endif
 #include<stdint.h>
 #include<limits.h>
-struct s_static_buffer
+typedef struct
 {
 	char *buffer;
 	int offset;
-};
-typedef struct s_static_buffer s_buffer;
+} s_buffer;
 char *get_next_line(int fd);
 void ft_bzero(void *s , size_t n);
 char *ft_strjoin(char const *s1 , char const *s2 );
